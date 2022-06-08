@@ -2,16 +2,18 @@ import './App.scss';
 import { useState } from 'react'
 import ButtonContainer from './Components/ButtonContainer/ButtonContainer.component';
 
-import img0 from './assets/0.jpg'
-import img1 from './assets/1.jpg'
-import img2 from './assets/2.jpg'
-import img3 from './assets/3.jpg'
-import img4 from './assets/4.jpg'
-import img5 from './assets/5.jpg'
-import img6 from './assets/6.jpg'
+import { randomWord } from './helpers/words'
+
+import img0 from './assets/0-min.jpg'
+import img1 from './assets/1-min.jpg'
+import img2 from './assets/2-min.jpg'
+import img3 from './assets/3-min.jpg'
+import img4 from './assets/4-min.jpg'
+import img5 from './assets/5-min.jpg'
+import img6 from './assets/6-min.jpg'
 
 const App = () => {
-  const word = 'apple'
+  const [word, setWord] = useState(randomWord())
   const [guessed, setGussed] = useState(new Set())
   const [wrong, setWrong] = useState(0)
 
@@ -46,8 +48,17 @@ const App = () => {
           <div className="word-container">
             {guessedWord().map(letter => <span style={{ display: 'inline-block', margin: '2rem 1rem', fontSize: '2rem', fontWeight: 'bold' }}>{letter}</span>)}
           </div>
-          <ButtonContainer guessed={guessed} handleAddLetter={handleAddLetter} />
-          {guessedWord().join("") == word && 'Winner'}
+
+
+          {guessedWord().join("") == word ?
+            <>
+              <h2 style={{ fontSize: '3rem', margin: '0' }}>Won!</h2>
+              <button className='reset-game' onClick={handleRestart}>Play Again</button>
+            </>
+            :
+            <ButtonContainer guessed={guessed} handleAddLetter={handleAddLetter} />
+
+          }
         </>
         :
         <>
