@@ -13,6 +13,7 @@ const App = () => {
   const guessedWord = () => {
     return word.split("").map(letter => guessed.has(letter) ? letter : "_")
   }
+
   const handleAddLetter = (e) => {
     setGussed(prev => new Set(prev.add(e.target.value)))
     if (!word.includes(e.target.value)) {
@@ -45,6 +46,7 @@ const App = () => {
           {wrong}
           {guessedWord()}
           {generateButtons()}
+          {guessedWord().join("") == word && 'Winner'}
         </> :
         <>
           <h3>Game Over</h3>
