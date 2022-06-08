@@ -1,0 +1,20 @@
+.btn-letter {
+    width: 50px;
+    background-color: rgb(255, 152, 115);
+    height: 50px;
+    cursor: pointer;
+    text-align: center;
+    // line-height: 50px;
+    border-radius: 5px;
+    font-size: 0.9rem;
+    padding: 0.2rem;
+    font-weight: bold;
+    margin: 0.2rem;
+    color: #222;
+    display: inline-block;
+
+    &:disabled {
+        color: #222;
+        background-color: #888;
+    }
+}

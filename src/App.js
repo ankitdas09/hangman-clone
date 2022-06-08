@@ -1,24 +1,57 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
+import { useState } from 'react'
 
-function App() {
+import Button from './Components/Button/Button.component';
+
+const App = () => {
+  const word = 'apple'
+  const [guessed, setGussed] = useState(new Set())
+  const [wrong, setWrong] = useState(0)
+
+  const maxWrong = 5;
+
+  const guessedWord = () => {
+    return word.split("").map(letter => guessed.has(letter) ? letter : "_")
+  }
+  const handleAddLetter = (e) => {
+    setGussed(prev => new Set(prev.add(e.target.value)))
+    if (!word.includes(e.target.value)) {
+      setWrong(currWrong => currWrong + 1)
+    }
+  }
+
+  const generateButtons = () => {
+    return "abcdefghijklmnopqrstuvwxyz"
+      .split("")
+      .map(letter =>
+        <Button
+          key={letter}
+          text={letter}
+          disabled={guessed.has(letter)}
+          handleAddLetter={handleAddLetter}
+        />)
+  }
+
+
+  const handleRestart = () => {
+    setWrong(0)
+    setGussed(new Set())
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {wrong < maxWrong ?
+        <>
+          {wrong}
+          {guessedWord()}
+          {generateButtons()}
+        </> :
+        <>
+          <h3>Game Over</h3>
+          <button onClick={handleRestart}>Start Again</button>
+        </>
+      }
+    </>
   );
 }
 
