@@ -1,3 +1,3 @@
 # Hangman Game
 ## Made using React
-### Game live on https://delightful-capybara-842950.netlify.app/
+### Game live on https://stately-halva-286420.netlify.app/
