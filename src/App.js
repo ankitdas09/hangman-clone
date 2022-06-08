@@ -33,6 +33,7 @@ const App = () => {
   }
 
   const handleRestart = () => {
+    setWord(randomWord())
     setWrong(0)
     setGussed(new Set())
   }
